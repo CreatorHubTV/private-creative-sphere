@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,6 +19,7 @@ import {
   DollarSign
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BottomNavigation from "@/components/BottomNavigation";
 
 const Live = () => {
   const [isLive, setIsLive] = useState(false);
@@ -67,7 +67,7 @@ const Live = () => {
 
   if (!isLive) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900">
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 pb-20">
         {/* Header */}
         <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -76,17 +76,17 @@ const Live = () => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate(-1)}
-                className="text-white hover:text-purple-300"
+                className="text-gray-300 hover:text-purple-300"
               >
                 <ArrowLeft className="h-5 w-5" />
               </Button>
-              <Crown className="h-8 w-8 text-purple-500" />
+              <Crown className="h-8 w-8 text-purple-400" />
               <h1 className="text-2xl font-bold text-white">Lives</h1>
             </div>
             
             <Button 
               onClick={() => setIsLive(true)}
-              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700"
+              className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white"
             >
               <Video className="h-4 w-4 mr-2" />
               Iniciar Live
@@ -141,12 +141,14 @@ const Live = () => {
             ))}
           </div>
         </div>
+
+        <BottomNavigation />
       </div>
     );
   }
 
   return (
-    <div className="h-screen bg-black flex">
+    <div className="h-screen bg-black flex pb-20">
       {/* Main Live Stream Area */}
       <div className="flex-1 relative">
         {/* Live Video */}

@@ -1,8 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import BottomNavigation from "@/components/BottomNavigation";
 import { 
   Search, 
   TrendingUp, 
@@ -39,19 +41,19 @@ const Home = () => {
   }));
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 pb-20">
       {/* Header */}
       <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <Crown className="h-8 w-8 text-purple-500" />
+            <Crown className="h-8 w-8 text-purple-400" />
             <h1 className="text-2xl font-bold text-white">CreatorHub</h1>
           </div>
           
           {/* Search Bar */}
           <div className="flex-1 max-w-md mx-8">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-300" />
               <Input
                 placeholder="Buscar criadores..."
                 value={searchTerm}
@@ -65,15 +67,15 @@ const Home = () => {
             <Button 
               variant="ghost" 
               size="sm" 
-              className="text-white hover:text-purple-300"
+              className="text-gray-300 hover:text-purple-300"
               onClick={() => navigate("/reels")}
             >
-              <Play className="h-5 w-5 mr-2" />
+              <Play className="h-5 w-5 mr-2 text-gray-300" />
               Reels
             </Button>
             <Button 
               variant="outline" 
-              className="border-gray-600 text-white hover:bg-gray-700"
+              className="border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
               onClick={() => navigate("/subscriber-dashboard")}
             >
               Dashboard
@@ -86,13 +88,13 @@ const Home = () => {
         {/* Hero Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-white mb-2">Descubra Criadores Incríveis</h2>
-          <p className="text-gray-400">Explore conteúdo exclusivo dos seus criadores favoritos</p>
+          <p className="text-gray-300">Explore conteúdo exclusivo dos seus criadores favoritos</p>
         </div>
 
         {/* Trending Creators */}
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-6">
-            <TrendingUp className="h-6 w-6 text-purple-500" />
+            <TrendingUp className="h-6 w-6 text-purple-400" />
             <h3 className="text-xl font-bold text-white">Em Alta</h3>
             <Badge className="bg-red-600 animate-pulse">AO VIVO</Badge>
           </div>
@@ -148,7 +150,7 @@ const Home = () => {
         {/* Featured Content */}
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-6">
-            <Flame className="h-6 w-6 text-orange-500" />
+            <Flame className="h-6 w-6 text-orange-400" />
             <h3 className="text-xl font-bold text-white">Conteúdo em Destaque</h3>
           </div>
           
@@ -206,7 +208,7 @@ const Home = () => {
               <h3 className="text-white font-semibold mb-2">Assista Reels</h3>
               <p className="text-gray-300 text-sm mb-4">Descubra vídeos curtos dos seus criadores favoritos</p>
               <Button 
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-purple-600 hover:bg-purple-700 text-white"
                 onClick={() => navigate("/reels")}
               >
                 Explorar Reels
@@ -220,7 +222,7 @@ const Home = () => {
               <h3 className="text-white font-semibold mb-2">Chat Privado</h3>
               <p className="text-gray-300 text-sm mb-4">Converse diretamente com seus criadores</p>
               <Button 
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-blue-600 hover:bg-blue-700 text-white"
                 onClick={() => navigate("/chat")}
               >
                 Abrir Chat
@@ -234,7 +236,7 @@ const Home = () => {
               <h3 className="text-white font-semibold mb-2">Lives</h3>
               <p className="text-gray-300 text-sm mb-4">Assista transmissões ao vivo exclusivas</p>
               <Button 
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-green-600 hover:bg-green-700 text-white"
                 onClick={() => navigate("/live")}
               >
                 Ver Lives
@@ -243,6 +245,8 @@ const Home = () => {
           </Card>
         </div>
       </div>
+
+      <BottomNavigation />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,6 +16,7 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import BottomNavigation from "@/components/BottomNavigation";
 
 const Reels = () => {
   const [currentReel, setCurrentReel] = useState(0);
@@ -115,7 +115,7 @@ const Reels = () => {
           </Button>
           
           <div className="flex items-center space-x-2">
-            <Crown className="h-6 w-6 text-purple-500" />
+            <Crown className="h-6 w-6 text-purple-400" />
             <span className="text-white font-bold">Reels</span>
           </div>
           
@@ -126,7 +126,7 @@ const Reels = () => {
       </header>
 
       {/* Main Reel Container */}
-      <div className="h-full relative">
+      <div className="h-full relative pb-20">
         {/* Video Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-black to-pink-900/30">
           <div className="h-full w-full flex items-center justify-center">
@@ -208,7 +208,7 @@ const Reels = () => {
               onClick={handleLike}
               className="h-12 w-12 p-0 bg-black/30 hover:bg-red-600/20 text-white rounded-full"
             >
-              <Heart className="h-6 w-6" />
+              <Heart className="h-6 w-6 text-gray-300" />
             </Button>
             <span className="text-white text-xs">{currentReelData.likes}</span>
           </div>
@@ -220,7 +220,7 @@ const Reels = () => {
               onClick={handleComment}
               className="h-12 w-12 p-0 bg-black/30 hover:bg-blue-600/20 text-white rounded-full"
             >
-              <MessageSquare className="h-6 w-6" />
+              <MessageSquare className="h-6 w-6 text-gray-300" />
             </Button>
             <span className="text-white text-xs">{currentReelData.comments}</span>
           </div>
@@ -232,7 +232,7 @@ const Reels = () => {
               onClick={handleShare}
               className="h-12 w-12 p-0 bg-black/30 hover:bg-green-600/20 text-white rounded-full"
             >
-              <Share className="h-6 w-6" />
+              <Share className="h-6 w-6 text-gray-300" />
             </Button>
             <span className="text-white text-xs">{currentReelData.shares}</span>
           </div>
@@ -242,7 +242,7 @@ const Reels = () => {
             size="sm"
             className="h-12 w-12 p-0 bg-black/30 hover:bg-yellow-600/20 text-white rounded-full"
           >
-            <Bookmark className="h-6 w-6" />
+            <Bookmark className="h-6 w-6 text-gray-300" />
           </Button>
           
           <Button
@@ -251,7 +251,7 @@ const Reels = () => {
             onClick={() => setIsMuted(!isMuted)}
             className="h-12 w-12 p-0 bg-black/30 hover:bg-gray-600/20 text-white rounded-full"
           >
-            {isMuted ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
+            {isMuted ? <VolumeX className="h-6 w-6 text-gray-300" /> : <Volume2 className="h-6 w-6 text-gray-300" />}
           </Button>
         </div>
 
@@ -291,6 +291,8 @@ const Reels = () => {
           />
         ))}
       </div>
+
+      <BottomNavigation />
     </div>
   );
 };

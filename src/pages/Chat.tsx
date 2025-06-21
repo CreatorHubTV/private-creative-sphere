@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +14,7 @@ import {
   Video,
   Settings
 } from "lucide-react";
+import BottomNavigation from "@/components/BottomNavigation";
 
 const Chat = () => {
   const [selectedChat, setSelectedChat] = useState(1);
@@ -44,16 +44,16 @@ const Chat = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-purple-900 pb-20">
       {/* Header */}
       <header className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <Crown className="h-8 w-8 text-purple-500" />
+            <Crown className="h-8 w-8 text-purple-400" />
             <h1 className="text-2xl font-bold text-white">CreatorHub</h1>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-700">
+            <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white">
               Voltar ao Dashboard
             </Button>
           </div>
@@ -215,6 +215,8 @@ const Chat = () => {
           </div>
         </div>
       </div>
+
+      <BottomNavigation />
     </div>
   );
 };
