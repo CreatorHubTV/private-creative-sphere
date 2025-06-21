@@ -11,7 +11,7 @@ const AgeVerification = () => {
 
   const handleConfirm = () => {
     localStorage.setItem("ageVerified", "true");
-    navigate("/login");
+    navigate("/home");
   };
 
   const handleDeny = () => {

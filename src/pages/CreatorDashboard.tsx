@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import MediaUpload from "@/components/MediaUpload";
 import { 
   Upload, 
   Users, 
@@ -19,7 +20,10 @@ import {
   Bell,
   Crown,
   Camera,
-  Eye
+  Eye,
+  Play,
+  Gift,
+  Radio
 } from "lucide-react";
 
 const CreatorDashboard = () => {
@@ -41,7 +45,11 @@ const CreatorDashboard = () => {
             <Button variant="ghost" size="sm" className="text-white hover:text-purple-300">
               <MessageSquare className="h-5 w-5" />
             </Button>
-            <Button variant="outline" className="border-gray-600 text-white hover:bg-gray-700">
+            <Button 
+              variant="outline" 
+              className="border-gray-600 text-white hover:bg-gray-700"
+              onClick={() => window.open("/creator/1", "_blank")}
+            >
               Ver Perfil
             </Button>
           </div>
@@ -55,12 +63,15 @@ const CreatorDashboard = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 bg-gray-800 border-gray-700">
+          <TabsList className="grid w-full grid-cols-6 bg-gray-800 border-gray-700">
             <TabsTrigger value="overview" className="data-[state=active]:bg-purple-600">
               Visão Geral
             </TabsTrigger>
             <TabsTrigger value="content" className="data-[state=active]:bg-purple-600">
               Conteúdo
+            </TabsTrigger>
+            <TabsTrigger value="live" className="data-[state=active]:bg-purple-600">
+              Live
             </TabsTrigger>
             <TabsTrigger value="subscribers" className="data-[state=active]:bg-purple-600">
               Assinantes
@@ -75,11 +86,11 @@ const CreatorDashboard = () => {
 
           <TabsContent value="overview" className="space-y-6">
             {/* Stats Cards */}
-            <div className="grid md:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-5 gap-6">
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-gray-300">
-                    Total de Assinantes
+                    Assinantes
                   </CardTitle>
                   <Users className="h-4 w-4 text-purple-400" />
                 </CardHeader>
@@ -105,7 +116,7 @@ const CreatorDashboard = () => {
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-gray-300">
-                    Conteúdos Postados
+                    Conteúdos
                   </CardTitle>
                   <Image className="h-4 w-4 text-blue-400" />
                 </CardHeader>
@@ -118,13 +129,26 @@ const CreatorDashboard = () => {
               <Card className="bg-gray-800/50 border-gray-700">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-gray-300">
-                    Taxa de Engajamento
+                    Doações
                   </CardTitle>
-                  <TrendingUp className="h-4 w-4 text-pink-400" />
+                  <Gift className="h-4 w-4 text-pink-400" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-white">R$ 2,345</div>
+                  <p className="text-xs text-pink-400">+15% este mês</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-gray-800/50 border-gray-700">
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium text-gray-300">
+                    Engajamento
+                  </CardTitle>
+                  <TrendingUp className="h-4 w-4 text-orange-400" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-white">89%</div>
-                  <p className="text-xs text-pink-400">+3% este mês</p>
+                  <p className="text-xs text-orange-400">+3% este mês</p>
                 </CardContent>
               </Card>
             </div>
@@ -139,12 +163,17 @@ const CreatorDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="flex items-center space-x-4 p-3 bg-gray-700/30 rounded-lg">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  {[
+                    { icon: Users, text: "Novo assinante: @usuario123", time: "Há 2 horas", color: "text-purple-500" },
+                    { icon: Gift, text: "Doação de R$ 25 recebida", time: "Há 3 horas", color: "text-green-500" },
+                    { icon: MessageSquare, text: "Nova mensagem privada", time: "Há 5 horas", color: "text-blue-500" },
+                    { icon: Eye, text: "Seu reel alcançou 1k visualizações", time: "Há 1 dia", color: "text-pink-500" }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center space-x-4 p-3 bg-gray-700/30 rounded-lg">
+                      <item.icon className={`w-5 h-5 ${item.color}`} />
                       <div className="flex-1">
-                        <p className="text-white text-sm">Novo assinante: @usuario{item}</p>
-                        <p className="text-gray-400 text-xs">Há {item} horas</p>
+                        <p className="text-white text-sm">{item.text}</p>
+                        <p className="text-gray-400 text-xs">{item.time}</p>
                       </div>
                     </div>
                   ))}
@@ -156,79 +185,112 @@ const CreatorDashboard = () => {
           <TabsContent value="content" className="space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-xl font-bold text-white">Gerenciar Conteúdo</h3>
-              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                <Upload className="h-4 w-4 mr-2" />
-                Novo Post
-              </Button>
+              <div className="flex space-x-2">
+                <Button 
+                  variant="outline"
+                  className="border-gray-600 text-white hover:bg-gray-700"
+                  onClick={() => window.open("/reels", "_blank")}
+                >
+                  <Play className="h-4 w-4 mr-2" />
+                  Ver Reels
+                </Button>
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                  <Upload className="h-4 w-4 mr-2" />
+                  Novo Conteúdo
+                </Button>
+              </div>
             </div>
 
-            {/* Upload Form */}
-            <Card className="bg-gray-800/50 border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Criar Novo Post</CardTitle>
-                <CardDescription className="text-gray-400">
-                  Faça upload de fotos, vídeos ou crie posts de texto
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-3 gap-4">
-                  <Button variant="outline" className="h-24 border-gray-600 border-dashed hover:border-purple-500">
-                    <div className="text-center">
-                      <Image className="h-6 w-6 mx-auto mb-2 text-gray-400" />
-                      <span className="text-sm text-gray-400">Foto</span>
-                    </div>
-                  </Button>
-                  <Button variant="outline" className="h-24 border-gray-600 border-dashed hover:border-purple-500">
-                    <div className="text-center">
-                      <Video className="h-6 w-6 mx-auto mb-2 text-gray-400" />
-                      <span className="text-sm text-gray-400">Vídeo</span>
-                    </div>
-                  </Button>
-                  <Button variant="outline" className="h-24 border-gray-600 border-dashed hover:border-purple-500">
-                    <div className="text-center">
-                      <FileText className="h-6 w-6 mx-auto mb-2 text-gray-400" />
-                      <span className="text-sm text-gray-400">Texto</span>
-                    </div>
-                  </Button>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="caption" className="text-white">Legenda</Label>
-                  <Textarea 
-                    id="caption"
-                    placeholder="Escreva uma legenda para seu post..."
-                    className="bg-gray-700 border-gray-600 text-white"
-                  />
-                </div>
-
-                <Button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-                  Publicar Conteúdo
-                </Button>
-              </CardContent>
-            </Card>
+            {/* Upload Component */}
+            <MediaUpload />
 
             {/* Content Grid */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <Card key={item} className="bg-gray-800/50 border-gray-700 overflow-hidden">
-                  <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                    <Camera className="h-8 w-8 text-gray-400" />
-                  </div>
-                  <CardContent className="p-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="text-white text-sm font-medium">Post #{item}</p>
-                        <p className="text-gray-400 text-xs">Há 2 dias</p>
+            <Card className="bg-gray-800/50 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Seus Conteúdos</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Gerencie todo o seu conteúdo publicado
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {[1, 2, 3, 4, 5, 6].map((item) => (
+                    <Card key={item} className="bg-gray-700/30 border-gray-600 overflow-hidden">
+                      <div className="aspect-square bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <Camera className="h-8 w-8 text-gray-400" />
                       </div>
-                      <div className="flex items-center space-x-1 text-gray-400">
-                        <Eye className="h-4 w-4" />
-                        <span className="text-xs">{item * 47}</span>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <p className="text-white text-sm font-medium">Post #{item}</p>
+                            <p className="text-gray-400 text-xs">Há 2 dias</p>
+                          </div>
+                          <div className="flex items-center space-x-1 text-gray-400">
+                            <Eye className="h-4 w-4" />
+                            <span className="text-xs">{item * 47}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="live" className="space-y-6">
+            <Card className="bg-gray-800/50 border-gray-700">
+              <CardHeader>
+                <CardTitle className="text-white">Centro de Transmissão</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Gerencie suas lives e interaja com seus assinantes em tempo real
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card className="bg-gradient-to-r from-red-900/30 to-pink-900/30 border-red-500/30">
+                    <CardContent className="p-6 text-center">
+                      <Radio className="h-12 w-12 text-red-400 mx-auto mb-4" />
+                      <h3 className="text-white font-semibold mb-2">Iniciar Live</h3>
+                      <p className="text-gray-300 text-sm mb-4">
+                        Transmita ao vivo para seus assinantes
+                      </p>
+                      <Button 
+                        className="bg-red-600 hover:bg-red-700"
+                        onClick={() => window.open("/live", "_blank")}
+                      >
+                        <Radio className="h-4 w-4 mr-2" />
+                        Ir ao Vivo
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="bg-gray-700/30 border-gray-600">
+                    <CardContent className="p-6">
+                      <h3 className="text-white font-semibold mb-4">Estatísticas de Live</h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-gray-300">Lives este mês:</span>
+                          <span className="text-white font-medium">8</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-300">Tempo total:</span>
+                          <span className="text-white font-medium">12h 45m</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-300">Pico de audiência:</span>
+                          <span className="text-white font-medium">1,247 pessoas</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-300">Doações em lives:</span>
+                          <span className="text-green-400 font-medium">R$ 1,850</span>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="subscribers" className="space-y-6">
