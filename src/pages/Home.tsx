@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { 
   Search, 
   TrendingUp, 
-  Fire, 
+  Flame, 
   Users, 
   Heart,
   MessageSquare,
@@ -149,7 +148,7 @@ const Home = () => {
         {/* Featured Content */}
         <div className="mb-8">
           <div className="flex items-center space-x-2 mb-6">
-            <Fire className="h-6 w-6 text-orange-500" />
+            <Flame className="h-6 w-6 text-orange-500" />
             <h3 className="text-xl font-bold text-white">Conteúdo em Destaque</h3>
           </div>
           
