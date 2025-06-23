@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      content: {
+        Row: {
+          created_at: string | null
+          creator_id: string | null
+          description: string | null
+          duration: number | null
+          id: string
+          is_premium: boolean | null
+          media_url: string
+          thumbnail_url: string | null
+          title: string | null
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          creator_id?: string | null
+          description?: string | null
+          duration?: number | null
+          id?: string
+          is_premium?: boolean | null
+          media_url: string
+          thumbnail_url?: string | null
+          title?: string | null
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          creator_id?: string | null
+          description?: string | null
+          duration?: number | null
+          id?: string
+          is_premium?: boolean | null
+          media_url?: string
+          thumbnail_url?: string | null
+          title?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
       creators: {
         Row: {
           avatar_url: string
@@ -88,6 +127,179 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      donations: {
+        Row: {
+          amount: number
+          created_at: string | null
+          creator_id: string | null
+          donor_id: string | null
+          id: string
+          message: string | null
+          status: string | null
+          stripe_payment_intent_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          creator_id?: string | null
+          donor_id?: string | null
+          id?: string
+          message?: string | null
+          status?: string | null
+          stripe_payment_intent_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          creator_id?: string | null
+          donor_id?: string | null
+          id?: string
+          message?: string | null
+          status?: string | null
+          stripe_payment_intent_id?: string | null
+        }
+        Relationships: []
+      }
+      favorites: {
+        Row: {
+          created_at: string | null
+          creator_id: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          creator_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          creator_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      follows: {
+        Row: {
+          created_at: string | null
+          follower_id: string | null
+          following_id: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          follower_id?: string | null
+          following_id?: string | null
+          id?: string
+        }
+        Update: {
+          created_at?: string | null
+          follower_id?: string | null
+          following_id?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      likes: {
+        Row: {
+          content_id: string | null
+          created_at: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          content_id?: string | null
+          created_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          content_id?: string | null
+          created_at?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "likes_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      live_streams: {
+        Row: {
+          created_at: string | null
+          creator_id: string | null
+          description: string | null
+          ended_at: string | null
+          id: string
+          started_at: string | null
+          status: string | null
+          stream_key: string | null
+          title: string
+          viewer_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          creator_id?: string | null
+          description?: string | null
+          ended_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          stream_key?: string | null
+          title: string
+          viewer_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          creator_id?: string | null
+          description?: string | null
+          ended_at?: string | null
+          id?: string
+          started_at?: string | null
+          status?: string | null
+          stream_key?: string | null
+          title?: string
+          viewer_count?: number | null
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          message_type: string | null
+          read_at: string | null
+          receiver_id: string | null
+          sender_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          message_type?: string | null
+          read_at?: string | null
+          receiver_id?: string | null
+          sender_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          message_type?: string | null
+          read_at?: string | null
+          receiver_id?: string | null
+          sender_id?: string | null
+        }
+        Relationships: []
       }
       order_items: {
         Row: {
@@ -189,25 +401,79 @@ export type Database = {
       }
       profiles: {
         Row: {
+          avatar_url: string | null
+          banner_url: string | null
+          bio: string | null
           created_at: string | null
           full_name: string | null
           id: string
+          is_creator: boolean | null
           phone: string | null
+          stripe_account_id: string | null
+          subscription_price: number | null
           updated_at: string | null
+          username: string | null
         }
         Insert: {
+          avatar_url?: string | null
+          banner_url?: string | null
+          bio?: string | null
           created_at?: string | null
           full_name?: string | null
           id: string
+          is_creator?: boolean | null
           phone?: string | null
+          stripe_account_id?: string | null
+          subscription_price?: number | null
           updated_at?: string | null
+          username?: string | null
         }
         Update: {
+          avatar_url?: string | null
+          banner_url?: string | null
+          bio?: string | null
           created_at?: string | null
           full_name?: string | null
           id?: string
+          is_creator?: boolean | null
           phone?: string | null
+          stripe_account_id?: string | null
+          subscription_price?: number | null
           updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          created_at: string | null
+          creator_id: string | null
+          expires_at: string | null
+          id: string
+          price: number | null
+          status: string | null
+          stripe_subscription_id: string | null
+          subscriber_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          creator_id?: string | null
+          expires_at?: string | null
+          id?: string
+          price?: number | null
+          status?: string | null
+          stripe_subscription_id?: string | null
+          subscriber_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          creator_id?: string | null
+          expires_at?: string | null
+          id?: string
+          price?: number | null
+          status?: string | null
+          stripe_subscription_id?: string | null
+          subscriber_id?: string | null
         }
         Relationships: []
       }
